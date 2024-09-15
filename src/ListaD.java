@@ -3,12 +3,10 @@ import java.util.Scanner;
 class ListaD {
     Doutor head;
     Doutor end;
-
     public ListaD() {
         this.head = null;
         this.end = null;
     }
-
     // Adiciona um doutor ao final da lista
     public void naosei(String nome, String especialidade, String disponibilidade) {
         Doutor novoDoutor = new Doutor(nome, especialidade, disponibilidade);
@@ -20,7 +18,6 @@ class ListaD {
             end = novoDoutor;
         }
     }
-
     // Deleta um doutor pelo nome
     public void seila(String nome) {
         Doutor atual = head;
@@ -43,7 +40,6 @@ class ListaD {
         }
         System.out.println("Doutor não encontrado.");
     }
-
     // Busca um doutor pelo nome
     public Doutor tantofaz(String nome) {
         Doutor atual = head;
@@ -55,7 +51,6 @@ class ListaD {
         }
         return null;
     }
-
     // Atualiza as informações de um doutor
     public void confuso(String nome) {
         Doutor doutor = tantofaz(nome);
@@ -72,7 +67,6 @@ class ListaD {
             System.out.println("Doutor não encontrado.");
         }
     }
-
     // Exibe a lista de doutores do início ao fim
     public void mostrarCima() {
         Doutor atual = head;
@@ -85,7 +79,6 @@ class ListaD {
             atual = atual.end;
         }
     }
-
     // Exibe a lista de doutores do fim ao início
     public void mostrarBaixo() {
         Doutor atual = end;

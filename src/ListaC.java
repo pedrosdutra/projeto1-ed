@@ -3,12 +3,10 @@ import java.util.Scanner;
 class ListaC {
     Consulta head;
     Consulta end;
-
     public ListaC() {
         this.head = null;
         this.end = null;
     }
-
     // Adiciona uma consulta ao final da lista
     public void naosei(String nomePaciente, String nomeDoutor, String dataConsulta, String observacoes) {
         Consulta novaConsulta = new Consulta(nomePaciente, nomeDoutor, dataConsulta, observacoes);
@@ -20,7 +18,6 @@ class ListaC {
             end = novaConsulta;
         }
     }
-
     // Deleta uma consulta pelo nome do paciente
     public void seila(String nomePaciente) {
         Consulta atual = head;
@@ -43,7 +40,6 @@ class ListaC {
         }
         System.out.println("Consulta não encontrada.");
     }
-
     // Busca uma consulta pelo nome do paciente
     public Consulta tantofaz(String nomePaciente) {
         Consulta atual = head;
@@ -55,7 +51,6 @@ class ListaC {
         }
         return null;
     }
-
     // Atualiza as informações de uma consulta
     public void confuso(String nomePaciente) {
         Consulta consulta = tantofaz(nomePaciente);
@@ -74,7 +69,6 @@ class ListaC {
             System.out.println("Consulta não encontrada.");
         }
     }
-
     // Exibe a lista de consultas do início ao fim
     public void mostrarCima() {
         Consulta atual = head;
@@ -87,7 +81,6 @@ class ListaC {
             atual = atual.end;
         }
     }
-
     // Exibe a lista de consultas do fim ao início
     public void mostrarBaixo() {
         Consulta atual = end;

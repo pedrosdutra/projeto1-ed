@@ -9,7 +9,6 @@ public class ListaPedidos {
         inicio = null;
         fim = null;
     }
-
     public void adicionarPedido(String descricao, int quantidade, double total) {
         Pedido novoPedido = new Pedido(contaPedidos++, descricao, quantidade, total);
         PedidoNode novoPedidoNo = new PedidoNode(novoPedido);
@@ -24,10 +23,9 @@ public class ListaPedidos {
             fim.proximo = inicio;
         }
     }
-
     public void listarPedidos() {
         if (inicio == null) {
-            System.out.println("Nenhum peido no momento");
+            System.out.println("Nenhum pedido no momento");
             return;
         }
         PedidoNode atual = inicio;

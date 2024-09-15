@@ -8,7 +8,6 @@ class ListaP {
         this.head = null;
         this.end = null;
     }
-
     // Adiciona um paciente ao final da lista
     public void naosei(String nome, int idade, String historicoMedico, String dataUltimaConsulta) {
         Paciente novoPaciente = new Paciente(nome, idade, historicoMedico, dataUltimaConsulta);
@@ -20,7 +19,6 @@ class ListaP {
             end = novoPaciente;
         }
     }
-
     // Deleta um paciente pelo nome
     public void seila(String nome) {
         Paciente atual = head;
@@ -43,7 +41,6 @@ class ListaP {
         }
         System.out.println("Paciente não encontrado.");
     }
-
     // Busca um paciente pelo nome
     public Paciente tantofaz(String nome) {
         Paciente atual = head;
@@ -55,7 +52,6 @@ class ListaP {
         }
         return null;
     }
-
     // Atualiza as informações de um paciente
     public void confuso(String nome) {
         Paciente paciente = tantofaz(nome);
@@ -75,7 +71,6 @@ class ListaP {
             System.out.println("Paciente não encontrado.");
         }
     }
-
     // Exibe a lista de pacientes do início ao fim
     public void mostrarCima() {
         Paciente atual = head;
@@ -88,7 +83,6 @@ class ListaP {
             atual = atual.end;
         }
     }
-
     // Exibe a lista de pacientes do fim ao início
     public void mostrarBaixo() {
         Paciente atual = end;

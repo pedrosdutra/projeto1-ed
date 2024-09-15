@@ -6,7 +6,6 @@ public class Mesa {
     boolean ocupada;
     Pedido pedidos;
 
-
     public Mesa(int numero, String cliente, boolean ocupada, Pedido pedidos) {
         this.numero = numero;
         this.cliente = cliente;
@@ -20,5 +19,4 @@ public class Mesa {
     public String toString() {
         return "Mesa " + numero + "- Cliente: " + cliente + "- Ocupada" + (ocupada ? "Sim" : "Não");
     }
-    
 }

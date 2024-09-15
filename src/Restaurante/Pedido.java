@@ -10,10 +10,7 @@ public class Pedido {
         this.quantidade = quantidade;
         this.total = total;
     }
-
     public String toString() {
         return descricao + " - Quantidade: " + quantidade + "-Total: " +total;
     }
-
-    
 }
