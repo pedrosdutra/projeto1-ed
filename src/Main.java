@@ -3,6 +3,7 @@ import java.util.Scanner;
 // Função principal
 public class Main {
     public static void main(String[] args) {
+        new Tela();
         Scanner scanner = new Scanner(System.in);
         ListaP pacientes = new ListaP();
         ListaD doutores = new ListaD();
