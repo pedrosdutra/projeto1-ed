@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import Restaurante.Tela;
+
 // Função principal
 public class Main {
     public static void main(String[] args) {

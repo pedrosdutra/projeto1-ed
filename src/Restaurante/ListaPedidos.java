@@ -1,7 +1,7 @@
 package Restaurante;
 
 public class ListaPedidos {
-    private PedidoNode inicio;
+    PedidoNode inicio;
     private PedidoNode fim;
     private int contaPedidos = 1;
 

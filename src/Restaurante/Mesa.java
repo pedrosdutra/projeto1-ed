@@ -14,7 +14,7 @@ public class Mesa {
     }
     public void  fecharConta() {
         ocupada = false;
-        pedidos = new Pedido(cliente, numero, numero);
+        pedidos = null;
     }
     public String toString() {
         return "Mesa " + numero + "- Cliente: " + cliente + "- Ocupada" + (ocupada ? "Sim" : "Não");
