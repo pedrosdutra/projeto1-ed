@@ -14,13 +14,57 @@ public class Tela {
     public Tela() {
         listaMesa = new ListaMesa();
         listaPedidos = new ListaPedidos();
-        criarGUI();
+        criarTelaLogin();
     }
 
-    private void criarGUI() {
-        frame = new JFrame("Restaurante - Gerenciamento");
-        frame.setSize(600, 400);
+    private void criarTelaLogin() {
+        frame = new JFrame("Restaurante - Login");
+        frame.setSize(400, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+
+        JPanel painelLogin = new JPanel(new GridLayout(3, 2));
+
+        JLabel labelUsuario = new JLabel("Usuário:");
+        JTextField campoUsuario = new JTextField();
+        JLabel labelSenha = new JLabel("Senha:");
+        JPasswordField campoSenha = new JPasswordField();
+
+        JButton botaoLogin = new JButton("Login");
+        botaoLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String usuario = campoUsuario.getText();
+                String senha = new String(campoSenha.getPassword());
+
+                if (autenticarUsuario(usuario, senha)) {
+                    criarTelaPrincipal();
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Usuário ou senha inválidos.");
+                }
+            }
+        });
+
+        painelLogin.add(labelUsuario);
+        painelLogin.add(campoUsuario);
+        painelLogin.add(labelSenha);
+        painelLogin.add(campoSenha);
+        painelLogin.add(new JLabel());
+        painelLogin.add(botaoLogin);
+
+        frame.add(painelLogin, BorderLayout.CENTER);
+        frame.setVisible(true);
+    }
+
+    private boolean autenticarUsuario(String usuario, String senha) {
+        // Implementar autenticação (usuário: "admin", senha: "1234")
+        return usuario.equals("admin") && senha.equals("1234");
+    }
+
+    private void criarTelaPrincipal() {
+        frame.getContentPane().removeAll();  // Limpa a tela de login
+        frame.setTitle("Restaurante - Gerenciamento");
+        frame.setSize(600, 400);
         frame.setLayout(new BorderLayout());
 
         areaTexto = new JTextArea();
@@ -29,7 +73,7 @@ public class Tela {
         frame.add(scrollPane, BorderLayout.CENTER);
 
         JPanel painelBotoes = new JPanel();
-        painelBotoes.setLayout(new GridLayout(4, 2));
+        painelBotoes.setLayout(new GridLayout(2, 2, 10, 10));  // Melhora espaçamento
 
         // Botão para adicionar mesa
         JButton botaoAdicionarMesa = new JButton("Adicionar Mesa");
@@ -71,19 +115,33 @@ public class Tela {
         });
         painelBotoes.add(botaoListarPedidos);
 
+        // Botão para sair
+        JButton botaoSair = new JButton("Sair");
+        botaoSair.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                criarTelaLogin();  // Retorna à tela de login
+            }
+        });
+        painelBotoes.add(botaoSair);
+
         frame.add(painelBotoes, BorderLayout.SOUTH);
-        frame.setVisible(true);
+        frame.revalidate();  // Atualiza a tela
+        frame.repaint();  // Redesenha a tela
     }
 
     private void adicionarMesa() {
         String numeroStr = JOptionPane.showInputDialog("Número da Mesa:");
         String cliente = JOptionPane.showInputDialog("Nome do Cliente:");
         boolean ocupada = JOptionPane.showConfirmDialog(frame, "A mesa está ocupada?", "Ocupada", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
-
+    
         int numero = Integer.parseInt(numeroStr);
         Mesa mesa = new Mesa(numero, cliente, ocupada, null);
         listaMesa.adicionarMesa(mesa);
-        areaTexto.append("Mesa adicionada: " + mesa + "\n");
+    
+        String ocupacaoTexto = ocupada ? "Sim" : "Não";
+        areaTexto.append("Mesa adicionada: Mesa " + numero + " - Cliente: " + cliente + " - Ocupada: " + ocupacaoTexto + "\n");
+        scrollToBottom();
     }
 
     private void adicionarPedido() {
@@ -106,20 +164,22 @@ public class Tela {
         listaPedidos.adicionarPedido(descricao, quantidade, total);
 
         areaTexto.append("Pedido adicionado à mesa " + numero + ": " + descricao + "\n");
+        scrollToBottom();
     }
 
     private void listarMesas() {
-        areaTexto.setText(""); // Limpa a área de texto
+        areaTexto.setText("");  // Limpa a área de texto
         areaTexto.append("Listando mesas:\n");
         MesaNode atual = listaMesa.primeiro;
         while (atual != null) {
             areaTexto.append(atual.mesa.toString() + "\n");
             atual = atual.proximo;
         }
+        scrollToBottom();
     }
 
     private void listarPedidos() {
-        areaTexto.setText(""); // Limpa a área de texto
+        areaTexto.setText("");  // Limpa a área de texto
         areaTexto.append("Listando pedidos:\n");
         PedidoNode atual = listaPedidos.inicio;
         if (atual != null) {
@@ -130,6 +190,12 @@ public class Tela {
         } else {
             areaTexto.append("Nenhum pedido no momento\n");
         }
+        scrollToBottom();
+    }
+
+    // Método para rolar o JTextArea para o final após adicionar texto
+    private void scrollToBottom() {
+        areaTexto.setCaretPosition(areaTexto.getDocument().getLength());
     }
 
     public static void main(String[] args) {
